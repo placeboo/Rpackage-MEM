@@ -28,6 +28,7 @@
 #'    \item likelihood - The likelihood under the estimates.
 #' }
 #'
+#' @importFrom brm getProbScalarRR
 #' @export
 mem.mono = function(y, z, va, vb,
                     alpha.start, beta.start,
@@ -43,11 +44,11 @@ mem.mono = function(y, z, va, vb,
         nz = length(z.uniq)
 
         neg.log.value = function(alpha, beta){
-                #Pzmin_Pzmax = t(mapply(getProbScalarRR, va %*% alpha * (nz-1), vb %*% beta))
+
                 Pzmin_Pzmax = t(mapply(getProbScalarRR, va %*% alpha * (z.uniq[nz] - z.uniq[1]), vb %*% beta))
                 P.mat = matrix(0, ncol = nz, nrow = ny)
                 P.mat[, c(1, nz)] = Pzmin_Pzmax
-                # P.mat[, -c(1, nz)] = Pzmin_Pzmax[,1] * exp(va %*% alpha %*% t(c(1: (nz-2))))
+
                 P.mat[, -c(1, nz)] = Pzmin_Pzmax[,1] * exp(va %*% alpha %*% t(z.uniq)[-c(1,nz)])
 
                 n_0.vec = apply(P.mat, 2, function(x) sum(x==0))
@@ -59,7 +60,6 @@ mem.mono = function(y, z, va, vb,
                                 value = value - sum(y[z==z.uniq[i]] * log(P.mat[z==z.uniq[i],i]) + (1-y[z==z.uniq[i]]) * log(1-P.mat[z==z.uniq[i],i]))
 
                         }
-                        #save(z, P.mat,alpha, beta,va,Pzmin_Pzmax,nz, ny,vb, file = "test.Rdata")
                         return(value)
                 }
                 else{
