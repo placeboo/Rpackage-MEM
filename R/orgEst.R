@@ -24,15 +24,14 @@ orgEst = function(point.est, cov, type, name, va, vb, coverged, likelihood) {
                 linear.predictors = va %*% point.est[1:ncol(va)]
                 param.est = exp(linear.predictors)
 
-                output = list(type = type,
-                              point.est = point.est,
+                output = list(point.est = point.est,
                               se.est = se.est,
                               cov = cov,
                               conf.lower = conf.lower,
                               conf.upper = conf.upper,
                               p.value = p.value,
                               coefficients = coefficients,
-                              param.est = param.est,
+                              param = param.est,
                               converged = converged,
                               likelihood = likelihood)
 
