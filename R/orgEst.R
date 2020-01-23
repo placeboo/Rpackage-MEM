@@ -1,4 +1,6 @@
 #' Organize estimation result
+#'
+#' @noRd
 
 orgEst = function(point.est, cov, type, name, va, vb, coverged) {
 
@@ -15,7 +17,7 @@ orgEst = function(point.est, cov, type, name, va, vb, coverged) {
         }
 
 
-        if (type == "mono") {
+        if (type == "monotone") {
                 names(point.est) = names(se.est) = rownames(cov) = colnames(cov) = names(conf.lower) = names(conf.upper) = names(p.value) = name
                 coefficients = cbind(point.est, se.est, conf.lower, conf.upper,
                                      p.value)
@@ -33,7 +35,7 @@ orgEst = function(point.est, cov, type, name, va, vb, coverged) {
                               param.est = param.est,
                               converged = converged)
 
-                class(output) = c("mem", "monotone", "list")
+                class(output) = c("mem", type, "list")
 
         }
 
