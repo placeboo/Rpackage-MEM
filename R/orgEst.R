@@ -32,12 +32,11 @@ orgEst = function(point.est, cov, type, name, va, vb, coverged, likelihood) {
                               p.value = p.value,
                               coefficients = coefficients,
                               param = param.est,
-                              converged = converged,
+                              converged = coverged,
                               likelihood = likelihood)
 
                 class(output) = c("mem", type, "list")
 
         }
-
-
+        return(output)
 }

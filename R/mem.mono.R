@@ -34,7 +34,7 @@ mem.mono = function(y, z, va, vb,
                     alpha.start, beta.start,
                     max.step=10^4, thres=10^-6){
 
-        if (is.numeric(z)) stop("'z' should be numerical!")
+        if (!is.numeric(z)) stop("'z' should be numerical!")
 
         pa = length(alpha.start)
         pb = length(beta.start)
