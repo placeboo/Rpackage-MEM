@@ -2,7 +2,7 @@
 #'
 #' @noRd
 
-orgEst = function(point.est, cov, type, name, va, vb, coverged) {
+orgEst = function(point.est, cov, type, name, va, vb, coverged, likelihood) {
 
         if (any(is.na(test))) {
                 se.est = conf.lower = conf.upper = p.value = rep(NA, ncol(va) + ncol(vb))
@@ -33,7 +33,8 @@ orgEst = function(point.est, cov, type, name, va, vb, coverged) {
                               p.value = p.value,
                               coefficients = coefficients,
                               param.est = param.est,
-                              converged = converged)
+                              converged = converged,
+                              likelihood = likelihood)
 
                 class(output) = c("mem", type, "list")
 
