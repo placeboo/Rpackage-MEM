@@ -4,7 +4,7 @@
 
 orgEst = function(point.est, cov, type, name, va, vb, coverged, likelihood) {
 
-        if (any(is.na(test))) {
+        if (any(is.na(cov))) {
                 se.est = conf.lower = conf.upper = p.value = rep(NA, ncol(va) + ncol(vb))
 
         } else {
